@@ -98,7 +98,7 @@ colocacao.set_index('Colocação',inplace=True)
 st.write(pd.DataFrame({
     'Nome': colocacao['Nome'],
     'Pontos': colocacao['Total Acertos'],
-    "Porcentagem de Acerto": colocacao['Média Individual']*10
+    "Porcentagem de Acerto": colocacao['% de acerto']
 }))
 
 
@@ -149,7 +149,8 @@ st.write(pd.DataFrame({
     "Assunto": questao_materia_escolhida['Assunto'],
     "Dificuldade": questao_materia_escolhida['Dificuldade'],
     "Total Acertos": questao_materia_escolhida['Total Acertos'],
-    'Média (em %)': round(questao_materia_escolhida['Média']*100, 1)
+    # 'Média (em %)': round(questao_materia_escolhida['Média']*100, 1),
+    "Tempo Médio(minutos)": questao_materia_escolhida["Tempo"]/60
 }))
 
 grafico_questoes = questao_materia_escolhida['Correção','Média']
@@ -195,7 +196,6 @@ st.subheader("**2.3   Média de acertos por dificuldade**")
 media_por_dificuldade = media_por_dificuldade.reset_index()
 dificuldade_materia_escolhida = media_por_dificuldade[(media_por_dificuldade['Matéria'] == materia_escolhida)]
 
-print(dificuldade_materia_escolhida)
 # para nao mostrar on indices do dataframe na tabela do streamlit, podemos mudar o indice
 dificuldade_materia_escolhida.set_index('Dificuldade',inplace=True)
 

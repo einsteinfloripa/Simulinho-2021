@@ -34,8 +34,8 @@ dados = {
     'Média de Pontuação Total':[media_pontuacao_total],
     'Média da Porcentagem de Acerto': [media_porcem_total]
 }
-st.table(data=dados)
-st.write(pd.DataFrame(dados))
+#st.table(data=dados)
+#st.write(pd.DataFrame(dados))
 
 
 st.subheader("**1.1 Dados sobre as Questões Objetivas**")

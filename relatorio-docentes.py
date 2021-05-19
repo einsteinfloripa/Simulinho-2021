@@ -18,15 +18,14 @@ st.header("**1. Dados sobre a Prova Geral**")
 # número de inscritos
 # total_presentes = data.Index(['nome'])
 # print(total_presentes.value_counts())
-total_presentes = 12
+total_presentes = 92
 
 # media de pontuação total e porcentagem de acerto
 pontuacao_total = pd.read_pickle('dados-relatorio-alunos/pontuacao_total.pkl')
 
 media_pontuacao_total = round(pontuacao_total['Nota total'].mean(),1)
 
-# a media da % de acerto da prova é justamente a média de acerto, dividida pela quantidade total de pontos possíveis
-# como a redação vale 1000, e as questçoes objetivas 500, basta dividir por 500
+
 media_porcem_total = str(round(media_pontuacao_total / 1500, 3)*100) + '%'
 
 dados = {

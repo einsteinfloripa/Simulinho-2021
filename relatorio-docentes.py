@@ -72,9 +72,10 @@ media_acerto_materia = get_media_a_m()
 # o grafico fica com os rotulos na horizontal com as duas linhas a seguir, mas, quando o codigo é upado no servidor do streamlit ele sai todo desconfigurado. 
 # caso queira testar para ver se não dá mais o bug, é so "descomentar" as duas linhas a seguir
 
-# media_acerto_materia = media_acerto_materia.reset_index()
-# media_acerto_materia = media_acerto_materia.set_index('correcao')
+media_acerto_materia = media_acerto_materia.reset_index()
+media_acerto_materia = media_acerto_materia.set_index('Correção')
 
+st.markdown("**Gráfico da porcentagem média de acerto em cada matéria**")
 st.bar_chart(data=media_acerto_materia)
 st.write("Passando o mouse por cima do gráfico você pode identificar qual é a matéria e nota referentes a cada barra.")
 
@@ -136,6 +137,8 @@ st.write("Nesta seção são discretizados os acertos por questão")
 media_acerto_questao = media_acerto_questao.reset_index()
 questao_materia_escolhida = media_acerto_questao[(media_acerto_questao['Matéria'] == materia_escolhida)]
 
+
+# questao_materia_escolhida["Questão"] = questao_materia_escolhida["Questão"].astype(int)
 # para nao mostrar on indices do dataframe na tabela do streamlit, podemos mudar o indice
 questao_materia_escolhida.set_index('Questão',inplace=True)
 

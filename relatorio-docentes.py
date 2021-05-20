@@ -72,8 +72,8 @@ media_acerto_materia = get_media_a_m()
 # o grafico fica com os rotulos na horizontal com as duas linhas a seguir, mas, quando o codigo é upado no servidor do streamlit ele sai todo desconfigurado. 
 # caso queira testar para ver se não dá mais o bug, é so "descomentar" as duas linhas a seguir
 
-media_acerto_materia = media_acerto_materia.reset_index()
-media_acerto_materia = media_acerto_materia.set_index('Correção')
+# media_acerto_materia = media_acerto_materia.reset_index()
+# media_acerto_materia = media_acerto_materia.set_index('Correção')
 
 st.markdown("**Gráfico da porcentagem média de acerto em cada matéria**")
 st.bar_chart(data=media_acerto_materia)

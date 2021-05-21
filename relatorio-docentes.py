@@ -83,6 +83,10 @@ st.write("Passando o mouse por cima do gráfico você pode identificar qual é a
 
 media_redacao = pd.read_pickle('dados-relatorio-docentes/media_redacao.pkl')
 
+
+
+
+
 # tabela com os dados coletados acima
 st.subheader("**1.2 Dados sobre a Redação**")
 st.write(pd.DataFrame({

@@ -15,28 +15,6 @@ st.write("Façam bom uso!")
 
 st.header("**1. Dados sobre a Prova Geral**")
 
-# número de inscritos
-# total_presentes = data.Index(['nome'])
-# print(total_presentes.value_counts())
-total_presentes = 92
-
-# media de pontuação total e porcentagem de acerto
-pontuacao_total = pd.read_pickle('dados-relatorio-alunos/pontuacao_total.pkl')
-
-media_pontuacao_total = round(pontuacao_total['Nota total'].mean(),1)
-
-
-media_porcem_total = str(round(media_pontuacao_total / 1500, 3)*100) + '%'
-
-dados = {
-    'Total de Inscritos': [total_presentes],
-    'Média de Pontuação Total':[media_pontuacao_total],
-    'Média da Porcentagem de Acerto': [media_porcem_total]
-}
-#st.table(data=dados)
-#st.write(pd.DataFrame(dados))
-
-
 st.subheader("**1.1 Dados sobre as Questões Objetivas**")
 
 # media e % das objetivas 
@@ -65,7 +43,8 @@ st.write(pd.DataFrame({
    'Média de acertos': media_acerto_materia['Correção']*100
 }))
 
-media_acerto_materia = get_media_a_m()
+
+
 
 # gráfico com a média de acerto de cada matéria
 
@@ -74,18 +53,15 @@ media_acerto_materia = get_media_a_m()
 
 # media_acerto_materia = media_acerto_materia.reset_index()
 # media_acerto_materia = media_acerto_materia.set_index('Correção')
-
+media_acerto_materia = get_media_a_m()
 st.markdown("**Gráfico da porcentagem média de acerto em cada matéria**")
 st.bar_chart(data=media_acerto_materia)
 st.write("Passando o mouse por cima do gráfico você pode identificar qual é a matéria e nota referentes a cada barra.")
 
+
 # media e % da redação
 
 media_redacao = pd.read_pickle('dados-relatorio-docentes/media_redacao.pkl')
-
-
-
-
 
 # tabela com os dados coletados acima
 st.subheader("**1.2 Dados sobre a Redação**")
@@ -111,7 +87,6 @@ st.write(pd.DataFrame({
 # questões separadas por materia e por assunto
 # # tem o total de acertos, total de alunos que responderam e média de acerto
 
-
 media_acerto_materia = get_media_a_m()
 media_acerto_materia = media_acerto_materia.reset_index()
 
@@ -125,11 +100,9 @@ dados_materia_escolhida.set_index('Matéria',inplace=True)
 st.header("**2. Dados sobre a Matéria Selecionada**")
 
 st.write("Aqui você encontra dados sobre a matéria que foi selecionada na caixa localizada na aba lateral.")
-# st.write("A média em ", str(dados_materia_escolhida.index), " foi ", dados_materia_escolhida['correcao'])
 st.write(pd.DataFrame({
     "Média Acertos(em %)": dados_materia_escolhida['Correção']*100
 }))
-
 
 
 # todas as questões separadas por matéria
@@ -138,24 +111,18 @@ media_acerto_questao = pd.read_pickle('dados-relatorio-docentes/media_acerto_que
 
 st.subheader("**2.1   Média de acertos por questao**")
 st.write("Nesta seção são discretizados os acertos por questão")
+st.markdown("Como foram aplicadas duas provas com duas ordens de questões diferentes, há a possibilidade de os dados de uma mesma questão estarem separados em duas partes.")
 media_acerto_questao = media_acerto_questao.reset_index()
 questao_materia_escolhida = media_acerto_questao[(media_acerto_questao['Matéria'] == materia_escolhida)]
 
 
-# questao_materia_escolhida["Questão"] = questao_materia_escolhida["Questão"].astype(int)
 # para nao mostrar on indices do dataframe na tabela do streamlit, podemos mudar o indice
 questao_materia_escolhida.set_index('Questão',inplace=True)
-
-
-# print(questao_materia_escolhida)
-# st.table(data=questao_materia_escolhida[['assunto','dificuldade', 'Média']])
-
 
 st.write(pd.DataFrame({
     "Assunto": questao_materia_escolhida['Assunto'],
     "Dificuldade": questao_materia_escolhida['Dificuldade'],
     "Total Acertos": questao_materia_escolhida['Total Acertos'],
-    # 'Média (em %)': round(questao_materia_escolhida['Média']*100, 1),
     "Tempo Médio(minutos)": questao_materia_escolhida["Tempo"]/60
 }))
 
@@ -163,7 +130,6 @@ grafico_questoes = questao_materia_escolhida['Correção','Média']
 grafico_questoes = grafico_questoes.reset_index()
 grafico_questoes['questao'] = grafico_questoes['Questão'].astype(str)
 grafico_questoes["media"] = grafico_questoes['Correção','Média']
-# grafico_questoes = grafico.drop(columns=('correcao','Média'))
 grafico_questoes.set_index('questao',inplace=True)
 
 st.bar_chart(data=grafico_questoes['media'])
